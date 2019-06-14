@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/weather-app/static/css/main.5e2d2cb7.chunk.css",
+    "main.js": "/weather-app/static/js/main.e020e47b.chunk.js",
+    "main.js.map": "/weather-app/static/js/main.e020e47b.chunk.js.map",
+    "runtime~main.js": "/weather-app/static/js/runtime~main.4606d7f5.js",
+    "runtime~main.js.map": "/weather-app/static/js/runtime~main.4606d7f5.js.map",
+    "static/js/2.1e54061b.chunk.js": "/weather-app/static/js/2.1e54061b.chunk.js",
+    "static/js/2.1e54061b.chunk.js.map": "/weather-app/static/js/2.1e54061b.chunk.js.map",
+    "index.html": "/weather-app/index.html",
+    "precache-manifest.f8c3f50ae0dce634d061c3271bf9b77e.js": "/weather-app/precache-manifest.f8c3f50ae0dce634d061c3271bf9b77e.js",
+    "service-worker.js": "/weather-app/service-worker.js",
+    "static/css/main.5e2d2cb7.chunk.css.map": "/weather-app/static/css/main.5e2d2cb7.chunk.css.map",
+    "static/media/barry-simon-310250-unsplash.jpg": "/weather-app/static/media/barry-simon-310250-unsplash.0077e370.jpg",
+    "static/media/brandon-morgan-15365-unsplash.jpg": "/weather-app/static/media/brandon-morgan-15365-unsplash.9aa5eaf3.jpg",
+    "static/media/gabriele-diwald-201135-unsplash.jpg": "/weather-app/static/media/gabriele-diwald-201135-unsplash.d811903d.jpg",
+    "static/media/jessica-fadel-453102-unsplash.jpg": "/weather-app/static/media/jessica-fadel-453102-unsplash.fb551c0a.jpg",
+    "static/media/john-westrock-1547565-unsplash.jpg": "/weather-app/static/media/john-westrock-1547565-unsplash.a8ad06d0.jpg",
+    "static/media/milkovi-1143501-unsplash.jpg": "/weather-app/static/media/milkovi-1143501-unsplash.d42093af.jpg",
+    "static/media/nicholas-kampouris-97080-unsplash.jpg": "/weather-app/static/media/nicholas-kampouris-97080-unsplash.5387cad7.jpg",
+    "static/media/val-vesa-1280252-unsplash.jpg": "/weather-app/static/media/val-vesa-1280252-unsplash.c579c9f7.jpg",
+    "static/media/vincenzo-di-giorgi-51527-unsplash.jpg": "/weather-app/static/media/vincenzo-di-giorgi-51527-unsplash.067baeff.jpg"
+  }
+}
