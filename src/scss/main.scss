@@ -25,17 +25,6 @@ $location-input-min-width: 300px;
 /*------------------------------------*\
   #SECTION- colors
 \*------------------------------------*/
-// 
-// primary-background
-// secondary-background
-// background-shadow
-// 
-// hover
-// hover-seachBtn-back
-// hover-seachBtn-text
-// active
-//
-// line
 $colors: (
     primary: rgb(31, 51, 83),
     secondary: rgb(252, 220, 0),
@@ -47,6 +36,10 @@ $colors: (
     active: rgba(255, 166, 0, 0.8),
 
     line: rgb(235, 235, 235),
+
+  error-border: rgb(255, 202, 57),
+  error-background: rgb(255, 244, 214),
+  error-text: rgb(199, 146, 0),
 );
 
 
@@ -81,6 +74,11 @@ $colors: (
   transform: translateY(-50%);
 }
 
+.h-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .relative {
   position: relative;
 }
@@ -102,7 +100,9 @@ body {
   z-index: -1;
   top: 0;
   left: 0;
+  background-color: rgb(238, 238, 238);
 }
+.weather-background[src=""] { display: none; }
 
 .container-main {
   background-color: color(background-secondary);
@@ -296,6 +296,71 @@ body {
   }
 }
 
+/*------------------------------------*\
+  #SECTION- error
+\*------------------------------------*/
+.error {
+  display: inline-block;
+  margin: auto;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: solid 1px color(error-border);
+  background-color: color(error-background);
+
+  &--geocoding {
+    margin-top: 10px;
+    padding: 3px 6px;
+    position: absolute;
+    top: 100%;
+    z-index: 99999;
+  }
+
+  @mixin box-arrow($width, $color) {
+    content: '';
+    position: absolute;
+
+    left: 50%;
+    bottom: 100%;
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    border-width: $width;
+    border-color: transparent transparent $color  transparent;
+
+    transform: translateX(-$width);
+  }
+
+  // background part of arrow
+  &--arrow:after {
+    @include box-arrow(10px, color(error-background));
+  }
+
+  // border part of arrow
+  &--arrow:before {
+    @include box-arrow(11px, color(error-border));
+  }
+
+  &__message {
+    color: color(error-text);
+
+    &--geocoding {
+      white-space: nowrap;
+    }
+  }
+
+  &__dismissBtn {
+    background-color: transparent;
+    border: solid 1px color(error-text);
+    border-radius: 10px;
+    padding: 0 3px;
+    color: color(error-text);
+    cursor: pointer;
+  }
+}
+
+
 
 
 /*------------------------------------*\
@@ -365,6 +430,8 @@ body {
   .unit {
     &__container {
       right: 15px;
+      position: static;
+      margin: 20px 0;
     }
   }
 
@@ -407,6 +474,16 @@ body {
       }
     }
   }
+
+
+  .error {
+    &__message {
+      &--geocoding {
+        white-space: initial;
+      }
+    }
+  }
+
 }
 
 /*------------------------------------*\

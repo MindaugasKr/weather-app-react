@@ -2,9 +2,10 @@ import React, { createRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import autosugestPlaces from '../apis/autosugestPlaces';
-import { fetchWeatherData } from '../redux/actions';
+import { fetchWeatherData, changeFetchCoordinatesErrorStatus } from '../redux/actions';
 
 import loadingIndicator from '../images/loader/loading_indicator.png';
+import ErrorFailedToFetchGeoCoding from './error/ErrorFailedToFetchGeoCoding';
 
 const inputRef = createRef();
 var placeAutocomplete;
@@ -32,8 +33,12 @@ const Search = (props) => {
     return <img className="search__loading-indicator" alt="" src={loadingIndicator} />;
   }
 
+  const onErrorDismiss = () => {
+    props.changeFetchCoordinatesErrorStatus(false);
+  }
+
   return (
-    <div className="search">
+    <div className="search relative">
       {props.fetchingData ? onDataFetching() : ''}
       <div>
         <input 
@@ -50,6 +55,9 @@ const Search = (props) => {
           <i className="fas fa-search" />
         </button>
       </div>
+
+      {props.fetchCoordinatesErrorStatus ? <ErrorFailedToFetchGeoCoding onDismiss={onErrorDismiss} /> : ''}
+
     </div>
   );
 };
@@ -57,7 +65,8 @@ const Search = (props) => {
 const mapStateToProps = (state) => {
   return {
     fetchingData: state.appState.fetchingData,
+    fetchCoordinatesErrorStatus: state.appState.fetchCoordinatesErrorStatus,
   }
 }
 
-export default connect(mapStateToProps, { fetchWeatherData})(Search);
+export default connect(mapStateToProps, { fetchWeatherData, changeFetchCoordinatesErrorStatus})(Search);

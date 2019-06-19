@@ -1,3 +1,3 @@
 export default {
-  subpath: "/weather-app/",
+  subpath: "/weather-app/index.html",
 }

@@ -1,11 +1,19 @@
 import {
   FETCHING_DATA,
+  ERROR_FETCH_COORDINATES,
 } from '../actions/types';
 
-export default (state = {fetchingData: false}, action) => {
+const initialState = {
+  fetchingData: false,
+  fetchCoordinatesErrorStatus: false,
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_DATA:
-      return {fetchingData: action.payload };
+      return {...state, fetchingData: action.payload };
+    case ERROR_FETCH_COORDINATES:
+      return {...state, fetchCoordinatesErrorStatus: action.payload};
     default: return state;
   }
 }

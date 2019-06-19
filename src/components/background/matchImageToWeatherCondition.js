@@ -21,7 +21,7 @@ const matchImageToWeatherCondition = (code) => {
     case (code < 801): return img_7; // actual // clear
     case (code < 803): return img_9; // actual [801, 802], // clouds few
     case (code < 900): return img_1; // actual [803, 804], // clouds overcast
-    default: return img_7;
+    default: return '';
   }
 };
 

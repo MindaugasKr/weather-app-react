@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import {
   renderDate,
@@ -19,10 +18,4 @@ function InfoLocatioAndDate(props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    weatherData: state.weatherData.currentWeatherData,
-  }
-}
-
-export default connect(mapStateToProps)(InfoLocatioAndDate);
+export default InfoLocatioAndDate;

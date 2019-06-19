@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import {
   renderTemp,
@@ -48,12 +47,4 @@ function InfoWeather(props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    toCelsius: state.tempType.toCelsius,
-    weatherData: state.weatherData.currentWeatherData,
-    uvIndex: state.weatherData.uvIndex,
-  }
-}
-
-export default connect(mapStateToProps)(InfoWeather);
+export default InfoWeather;

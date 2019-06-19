@@ -1,0 +1,6 @@
+2019-06-19
+	Changed search history push address to .../index.html, to prevent having to click back button twice when leave page.
+	Removed default background image. Image will not be displayed with unknown weather code.
+	Added fallback for current location api failures.
+	Change how response.status is handeled on apis: weatherForecast, currentWeather.
+	UI now displays messages after api failures.

@@ -2,33 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ForecastEntry from './ForecastEntry';
-
-const uuidv4 = require('uuid/v4');
+import prepContent from './prepContent';
 
 const Forecast = (props) => {
-  let entries;
-  if (props.dataList) {
+
+  const prepEntries = dataList => {
     const filteredData = props.dataList.filter(data => {
       return data.timeText.includes('09:00:00');
     })
-    entries = filteredData.map(data =>
+    return filteredData.map(data =>
       <ForecastEntry
-        key={uuidv4()} 
+        key={data.timeText}
         weatherData={{
-          ...data, 
-          timeZone: props.timeZone, 
-          toCelsius: props.toCelsius 
-        }} dateFormat={'MDD'} 
+          ...data,
+          timeZone: props.timeZone,
+          toCelsius: props.toCelsius
+        }} dateFormat={'MDD'}
       />);
-  } else {
-    entries = '';
   }
 
   return (
     <div className="week">
       <h3 className="weather-table__title">Later this week:</h3>
       <div className="weather-table">
-        {entries}
+        {prepContent(props.dataList, prepEntries)}
       </div>
     </div>
   )

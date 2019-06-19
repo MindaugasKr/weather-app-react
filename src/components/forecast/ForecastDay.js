@@ -2,15 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ForecastEntry from './ForecastEntry';
+import prepContent from './prepContent';
 
-const uuidv4 = require('uuid/v4');
-
-function ForecastDay(props) {  
-  let entries;
-  if (props.dataList) {
-    entries = props.dataList.slice(0, 8).map(data =>
-      <ForecastEntry 
-        key={uuidv4()} 
+function ForecastDay(props) {
+  const prepEntries = dataList => {
+    return props.dataList.slice(0, 8).map(data =>
+      <ForecastEntry
+        key={data.timeText}
         weatherData={{
           ...data,
           timeZone: props.timeZone,
@@ -18,15 +16,13 @@ function ForecastDay(props) {
         }}
         dateFormat={'MDDHHMM'}
       />);
-  } else {
-    entries = '';
   }
 
   return (
     <div className="hourly">
       <h3 className="weather-table__title">Upcoming hours:</h3>
       <div className="weather-table">
-        {entries}
+        {prepContent(props.dataList, prepEntries)}
       </div>
     </div>
   )

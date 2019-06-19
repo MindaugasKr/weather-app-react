@@ -3,17 +3,18 @@ import axios from 'axios';
 
 const currentLocation = async () => {
   const response = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${keys.ipGeolocation}`);
-  
-  if (response.status !== 200) throw Object.assign(
-    new Error('Invalid response from server'),
-    { code: response.status }
-  );
 
-  const data = response.data;
-
-  return {
-      lat: data.latitude,
-      lon: data.longitude,
+  if (response.status === 200) {
+    return {
+      lat: response.data.latitude,
+      lon: response.data.longitude,
+    }
+  } else {
+    // fallback if finding current location fails
+    return {
+      lat: 54.6872,
+      lon: 25.2797,
+    }
   }
 }
 

@@ -12,14 +12,13 @@ import {
   SET_TEMP_TYPE_FAHRENHEIT,
   FETCHING_DATA,
   HISTORY_STATE_TO_CURRENT_STATE,
+  ERROR_FETCH_COORDINATES,
 } from './types';
 
 import config from '../../config';
 
 // time zone look up
 const tzlookup = require("tz-lookup");
-
-const createLatLonUrl = (lat, lon) => `/${lat}/${lon}`;
 
 export const fetchWeatherData = query => async (dispatch, getState) => {
 
@@ -32,7 +31,19 @@ export const fetchWeatherData = query => async (dispatch, getState) => {
   // get coordinates fron location search query
   if (query) {
     ({lat, lon} = await placeGeocoding(query));
-  // get coordinates of current location
+    // On placeGeocoding failure
+    if (!lat || !lon) {
+      dispatch({
+        type: FETCHING_DATA,
+        payload: false
+      });
+      dispatch({
+        type: ERROR_FETCH_COORDINATES,
+        payload: true
+      });
+      return;
+    }
+  // Get coordinates of current location
   } else {
     ({lat, lon} = await currentLocation());
   }
@@ -62,7 +73,6 @@ export const fetchWeatherData = query => async (dispatch, getState) => {
     payload: data,
   })
 
-  // history.push('/test'+createLatLonUrl(lat, lon), [getState()]);
   history.push(config.subpath, [getState()]);
 }
 
@@ -76,5 +86,12 @@ export const histoyStateToCurrentState = (historyState) => {
   return {
     type: HISTORY_STATE_TO_CURRENT_STATE,
     payload: historyState,
+  }
+}
+
+export const changeFetchCoordinatesErrorStatus = isError => {
+  return {
+    type: ERROR_FETCH_COORDINATES,
+    payload: isError
   }
 }
