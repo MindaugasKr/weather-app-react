@@ -11,37 +11,28 @@ import {
   formatWindSpeed,
 } from './dataFormatting';
 
-const valueUnknown = '--'
+const valueUnknown = '--';
 
 export const renderTemp = (temp, toCelsius, useAbbreviation=true) => {
-  if (temp || temp === 0) {
-    let tempAbbr = '';
-    if (useAbbreviation) {
-      tempAbbr = toCelsius ? 'C' : 'F';
-    }
-    return `${formatTemp(convertTemp(temp, toCelsius))}\xB0 ${tempAbbr}`;
-  } else {
-    return valueUnknown;
-  }
+  if (temp === undefined) return valueUnknown;
+  const tempAbbr = useAbbreviation ? (toCelsius ? 'C' : 'F') : '';
+  return `${formatTemp(convertTemp(temp, toCelsius))}\xB0 ${tempAbbr}`;
 }
 
 
 export const renderWindDirection = (windDeg) => {
-  const formatted = (windDeg || windDeg === 0) ? convertWindToAbbreviation(windDeg) : valueUnknown;
-  return formatted;
+  return (windDeg || windDeg === 0) ? convertWindToAbbreviation(windDeg) : valueUnknown;
 }
 
 export const renderWindSpeed = (windSpeed) => {
-  const formatted = (windSpeed || windSpeed === 0) ? `${formatWindSpeed(windSpeed)} m/s` : valueUnknown;
-  return formatted;
+  return (windSpeed || windSpeed === 0) ? `${formatWindSpeed(windSpeed)} m/s` : valueUnknown;
 }
 
 const renderAny = (units, value) => {
-  const formatted = (value || value === 0) ? `${value}${units}` : valueUnknown;
-  return formatted;
+  return (value || value === 0) ? `${value}${units}` : valueUnknown;
 }
 
-export const renderFall = renderAny.bind(null, ' mm');
+export const renderPrecipitation = renderAny.bind(null, ' mm');
 export const renderHumidity = renderAny.bind(null, '%');
 export const renderPressure = renderAny.bind(null, ' mbar');
 export const renderUvIndex = renderAny.bind(null, '');
@@ -50,7 +41,7 @@ export const renderUvIndex = renderAny.bind(null, '');
 export const renderDate = (date, type, timeZone) => {
   if (!date) return valueUnknown;
 
-  var formatter;
+  let formatter;
   switch (type) {
     case 'YYYYMDDHHMM': formatter = formatDateYYYYMDDHHMM; break;
     case 'MDDHHMM': formatter = formatDateMDDHHMM; break;
@@ -62,8 +53,7 @@ export const renderDate = (date, type, timeZone) => {
   return formatter(convertToDate(date, timeZone));
 }
 
-export const renderDayLength = (sunrise, sunset) => {
-  if (!sunrise || !sunset) return valueUnknown;
-
-  return getDayLength(convertToDate(sunrise), convertToDate(sunset));
-}
+export const renderDayLength = (sunrise, sunset) =>
+  (sunrise && sunset) ? 
+    getDayLength(convertToDate(sunrise), convertToDate(sunset)) : 
+    valueUnknown;

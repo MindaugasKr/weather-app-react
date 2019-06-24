@@ -4,3 +4,8 @@
 	Added fallback for current location api failures.
 	Change how response.status is handeled on apis: weatherForecast, currentWeather.
 	UI now displays messages after api failures.
+
+2019-06-24
+	Split main.scss into separate files.
+	Code refactoring, readability improvement.
+	Changes hourly forecast date format to HH:MM.

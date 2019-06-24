@@ -12,13 +12,17 @@ export const convertToDate = (unixUTC, timeZone) => {
   return new Date(stringLocalToQuery);
 };
 
-export const formatDateYYYYMDDHHMM = date => `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()} ${date.getHours()}:${doubleDigit(date.getMinutes())}`;
+export const formatDateYYYYMDDHHMM = date => 
+  `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()} ${date.getHours()}:${doubleDigit(date.getMinutes())}`;
 
-export const formatDateMDDHHMM = date => `${months[date.getMonth()]} ${date.getDate()} ${date.getHours()}:${doubleDigit(date.getMinutes())}`;
+export const formatDateMDDHHMM = date => 
+  `${months[date.getMonth()]} ${date.getDate()} ${date.getHours()}:${doubleDigit(date.getMinutes())}`;
 
-export const formatDateMDD = date => `${months[date.getMonth()]} ${date.getDate()}`;
+export const formatDateMDD = date => 
+  `${months[date.getMonth()]} ${date.getDate()}`;
 
-export const formatDateHHMM = date => `${date.getHours()}:${doubleDigit(date.getMinutes())}:${doubleDigit(date.getSeconds())}`;
+export const formatDateHHMM = date => 
+  `${date.getHours()}:${doubleDigit(date.getMinutes())}`;
 
 export const getDayLength = (dateSunrise, dateSunset) => {
   const dif = (dateSunset - dateSunrise) / 1000;
@@ -35,34 +39,27 @@ export const getDayLength = (dateSunrise, dateSunset) => {
 /**
  * Temperature conversion and formatting
  */
+const convertToFahrenheit = tempKelvin =>
+  (tempKelvin - 273.15) * 9 / 5 + 32;
+
+const convertToCelsius = tempKelvin =>
+  tempKelvin - 273.15;
+
 export const convertTemp = (tempKelvin, toCelsius) => {
   tempKelvin = parseFloat(tempKelvin);
-  if (toCelsius) {
-    return convertToCelsius(tempKelvin);
-  } else {
-    return convertToFahrenheit(tempKelvin);
-  }
+  return toCelsius ? 
+    convertToCelsius(tempKelvin) : 
+    convertToFahrenheit(tempKelvin);
 };
 
-function convertToFahrenheit(tempKelvin) {
-  return (tempKelvin - 273.15) * 9 / 5 + 32;
-}
-
-function convertToCelsius(tempKelvin) {
-  return tempKelvin - 273.15;
-}
-
 export const formatTemp = temp => {
-  let sign;
+  let sign = '';
 
   const roundedTemp = Math.round(parseFloat(temp));
 
-  if (roundedTemp > 0) {
-    sign = '+';
-  } else if (roundedTemp < 0) {
-    sign = '-';
-  } else {
-    sign = '';
+  // When temp !== 0
+  if (roundedTemp) {
+    sign = roundedTemp > 0 ? '+' : '-';
   }
 
   return `${sign}${roundedTemp}`;
@@ -72,10 +69,12 @@ export const formatTemp = temp => {
 /**
  * Wind conversion and formatting
  */
-export const convertWindToAbbreviation = windDeg => {
-  const windAbbreviations = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'NW'];
-  const index = Math.floor((parseInt(windDeg) + 22.5) / 45);
 
+// ! Last value must be written twice.
+const windAbbreviations = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'NW'];
+
+export const convertWindToAbbreviation = windDeg => {
+  const index = Math.floor((parseInt(windDeg) + 22.5) / 45);
   return windAbbreviations[index];
 }
 

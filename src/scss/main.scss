@@ -1,536 +1,61 @@
 /*------------------------------------*\
   #SECTION- variables
 \*------------------------------------*/
-$container-main-width: 900px;
-
-$current-weather-width: 784px;
-
-$location-input-height: 36px;
-$location-input-min-width: 300px;
+@import "./__variables.scss";
 
 /*------------------------------------*\
   #SECTION- functions
 \*------------------------------------*/
 
-@import "__functions.scss";
-
+@import "./other/__functions.scss";
 
 /*------------------------------------*\
   #SECTION- reset / changing defoults
 \*------------------------------------*/
 
-@import "__resets.scss";
-
+@import "./other/__resets.scss";
 
 /*------------------------------------*\
   #SECTION- colors
 \*------------------------------------*/
-$colors: (
-    primary: rgb(31, 51, 83),
-    secondary: rgb(252, 220, 0),
-
-    background-primary: white,
-    background-secondary: rgba(255,255,255,0.9),
-    background-shadow: rgba(255, 255, 255, 0.5),
-
-    active: rgba(255, 166, 0, 0.8),
-
-    line: rgb(235, 235, 235),
-
-  error-border: rgb(255, 202, 57),
-  error-background: rgb(255, 244, 214),
-  error-text: rgb(199, 146, 0),
-);
-
+@import "./other/__colors.scss";
 
 /*------------------------------------*\
   #SECTION- algolia places
 \*------------------------------------*/
-
-.algolia-places {
-  width: auto;
-  display: initial !important;
-}
-.ap-icon-pin {
-  display: none !important;
-}
+@import "./pageParts/__algolia.scss";
 
 /*------------------------------------*\
   #SECTION- generic
 \*------------------------------------*/
-
-.img-fit {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.center-margin {
-  margin: auto;
-}
-
-.v-center {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.h-center {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.relative {
-  position: relative;
-}
-
+@import "./other/__generic.scss";
+@import "./other/__global.scss";
 
 /*------------------------------------*\
   #SECTION- weather app
 \*------------------------------------*/
-
-body {
-  font-family: Heebo,Helvetica,sans-serif;
-  line-height: 1.7;
-}
-
-.weather-background {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  background-color: rgb(238, 238, 238);
-}
-.weather-background[src=""] { display: none; }
-
-.container-main {
-  background-color: color(background-secondary);
-  box-shadow: 0px 0px 20px 0px color(background-shadow);
-
-  width: $container-main-width;
-
-  text-align: center;
-
-  padding-top: 1px;
-  padding-bottom: 1px;
-
-  margin: 30px auto;
-}
-
-.search {
-  margin: 30px 0;
-
-  font-size: 18px;
-  font-weight: 300;
-
-  position: relative;
-
-  display: inline-block;
-
-
-  &:hover,
-  &:focus-within {
-    outline: solid 1px lightgray;
-  }
-
-  &__text-input {
-    max-width: 80%;
-    min-width: $location-input-min-width;
-    height: $location-input-height;
-    border: none;
-    padding-left: 15px;
-    font: inherit;
-  }
-
-  &__btn {
-    height: $location-input-height;
-    width: $location-input-height;
-
-    background-color: color(background-primary);
-    color: gray;
-    border: none;
-    font: inherit;
-
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: tomato;
-      color: black;
-    }
-  }
-
-  &__loading-indicator {
-    position: absolute;
-    top: 0;
-    right: 100%;
-    height: $location-input-height;
-    z-index: 999;
-
-    animation: spin 1s linear infinite;
-  }
-}
-
-.unit {
-  &__container {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-  }
-
-  &__btn {
-    $dimensions: 30px;
-
-    width: $dimensions;
-    height: $dimensions;
-
-    padding: 0;
-    margin: 0;
-    border: none;
-
-    background-color: inherit;
-
-    &:hover {
-      background-color: lightgray;
-    }
-    &--active {
-      background-color: color(active) !important;
-    }
-  }
-}
-
-.current {
-
-  background-color: color(background-primary);
-  display: inline-block;
-  width: 100%;
-
-  $img-dimensions: 100px;
-  &__img-container {
-    display: inline-block;
-    height: 100%;
-    width: $img-dimensions;
-  }
-  &__img {
-    width: $img-dimensions;
-    position: absolute;
-  }
-  &__temperature {
-    font-size: 90px;
-  }
-
-
-  &__location-time {
-    margin: 20px 0;
-  }
-  &__location,
-  &__time {
-    display: block;
-  }
-
-  &__location {
-    font-size: 32px;
-    font-weight: bold;
-  }
-
-  &__info-container {
-    margin-bottom: 24px;
-  }
-  &__info-block {
-    display: inline-block;
-    text-align: left;
-    vertical-align: top;
-    position: relative;
-
-    margin: 0 10px;
-  }
-
-  &__info-text {
-    display: block;
-
-    & strong {
-      font-weight: 500;
-    }
-  }
-}
-
-
-.hourly, .week {
-  margin: 30px 0;
-  background-color: color(background-primary);
-}
-
-
-.weather-table {
-  display: table;
-  width: 100%;
-
-  &__title {
-    margin: 0 0 24px;
-    font-size: 20px;
-  }
-
-  &__info-block {
-    display: table-cell;
-    padding: 24px 12px;
-
-    border-right: solid 1px color(line);
-
-
-    &--active {
-      background-color: color(active) !important; 
-    }
-    &:last-child {
-      border-right: none;
-    }
-  }
-  &__info-text {
-    display: block;
-    font-weight: 400;
-
-    
-
-    &--strong {
-      font-weight: 500;
-    }
-  }
-}
+@import "./pageParts/__mainContainer.scss";
+@import "./pageParts/__search.scss";
+@import "./pageParts/__tempUnitChange.scss";
+@import "./pageParts/__currentWeather.scss";
+@import "./pageParts/__weatherForecast.scss";
+@import "./pageParts/__chart.scss";
+@import "./pageParts/_background.scss";
 
 /*------------------------------------*\
   #SECTION- error
 \*------------------------------------*/
-.error {
-  display: inline-block;
-  margin: auto;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: solid 1px color(error-border);
-  background-color: color(error-background);
-
-  &--geocoding {
-    margin-top: 10px;
-    padding: 3px 6px;
-    position: absolute;
-    top: 100%;
-    z-index: 99999;
-  }
-
-  @mixin box-arrow($width, $color) {
-    content: '';
-    position: absolute;
-
-    left: 50%;
-    bottom: 100%;
-
-    width: 0;
-    height: 0;
-
-    border-style: solid;
-    border-width: $width;
-    border-color: transparent transparent $color  transparent;
-
-    transform: translateX(-$width);
-  }
-
-  // background part of arrow
-  &--arrow:after {
-    @include box-arrow(10px, color(error-background));
-  }
-
-  // border part of arrow
-  &--arrow:before {
-    @include box-arrow(11px, color(error-border));
-  }
-
-  &__message {
-    color: color(error-text);
-
-    &--geocoding {
-      white-space: nowrap;
-    }
-  }
-
-  &__dismissBtn {
-    background-color: transparent;
-    border: solid 1px color(error-text);
-    border-radius: 10px;
-    padding: 0 3px;
-    color: color(error-text);
-    cursor: pointer;
-  }
-}
-
-
-
+@import "./pageParts/__error.scss";
 
 /*------------------------------------*\
   #SECTION- media quaries
 \*------------------------------------*/
-// 900 px
-@media screen and (max-width: $container-main-width) {
-  .container-main {
-    width: auto;
-    margin: 0;
-  }
-
-  .current {
-    width: $current-weather-width;
-  }
-
-  .hourly, .week {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: $current-weather-width;
-    min-width: 0;
-  }
-
-  .weather-table {
-    display: table;
-    border-collapse: collapse;
-
-    &__info-block {
-      display: table-row;
-
-      padding: 0;
-      border-top: solid 1px color(line);
-    }
-    &__info-text {
-      display: table-cell;
-
-      padding: 0 12px;
-
-      & img {
-        height: 40px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .current {
-    width: 100%;
-
-    &__info-block {
-      text-align: center;
-    }    
-
-    &__info-block {
-      display: block;
-      margin-top: 24px;
-      margin-bottom: 24px;
-    }
-
-    &__img {
-      position: initial;
-      transform: none;
-    }    
-  }
-
-  .unit {
-    &__container {
-      right: 15px;
-      position: static;
-      margin: 20px 0;
-    }
-  }
-
-  .weather-table {
-
-    &__info-text {
-      padding: 0 3px;
-
-      & img {
-        height: 30px;
-      }
-    }
-  }
-}
-
-
-@media screen and (max-width: 360px) {
-  .search {
-    display: block;
-
-    &__text-input {
-      max-width: initial;
-      min-width: initial;
-      width: calc(100% - #{$location-input-height});
-    }
-  }
-
-  .current,.hourly, .week {
-
-    width: 100%;
-  }
-
-  .weather-table {
-
-    &__info-text {
-      padding: 0;
-
-      & img {
-        height: 30px;
-      }
-    }
-  }
-
-
-  .error {
-    &__message {
-      &--geocoding {
-        white-space: initial;
-      }
-    }
-  }
-
-}
+@import "./mediaQueries/__wide.scss";
+@import "./mediaQueries/__medium.scss";
+@import "./mediaQueries/__narrow.scss";
 
 /*------------------------------------*\
   #SECTION- animations
 \*------------------------------------*/
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*------------------------------------*\
-  #SECTION- for background component
-\*------------------------------------*/
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-  30% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.backgroundImg-fade-in {
-  opacity: 0;
-  animation: fade-in 2s linear;
-  animation-fill-mode: forwards; 
-}
-
-.backgroundImg-fade-out {
-  opacity: 1;
-  animation: fade-out 2s linear;
-  animation-fill-mode: forwards; 
-}
+@import "./animations/__spin.scss";
+@import "./animations/__forBackground.scss";

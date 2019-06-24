@@ -1,27 +1,21 @@
-function solveFall(data) {
-  let fall = null;
+function getPrecipitation(data) {
+  let type;
 
   if (data.rain) {
-    if (data.rain["1h"]) {
-      fall = data.rain["1h"];
-    } else if (data.rain["3h"]) {
-      fall = data.rain["3h"];
-    } else {
-      fall = undefined;
-    }
+    type = 'rain';
   } else if (data.snow) {
-    if (data.snow["1h"]) {
-      fall = data.snow["1h"];
-    } else if (data.snow["3h"]) {
-      fall = data.snow["3h"];
-    } else {
-      fall = undefined;
-    }
+    type = 'snow';
   } else {
-    fall = undefined;
+    return undefined;
   }
 
-  return fall;
+  if (data[type]['1h']) {
+    return data[type]['1h'];
+  } else if (data[type]['3h']) {
+    return data[type]['3h'];
+  } else {
+    return undefined;
+  }
 }
 
 export default function openweathermapAdapter(data) {
@@ -39,7 +33,7 @@ export default function openweathermapAdapter(data) {
     pressure: data.main.pressure, // hPa
     humidity: data.main.humidity, // %
 
-    fall: solveFall(data),
+    precipitation: getPrecipitation(data),
 
     sunrise: data.sys.sunrise,
     sunset: data.sys.sunset,

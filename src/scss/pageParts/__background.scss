@@ -1,0 +1,22 @@
+.weather-background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  background-color: rgb(238, 238, 238);
+}
+.weather-background[src=""] { display: none; }
+
+.backgroundImg-fade-in {
+  opacity: 0;
+  animation: fade-in 2s linear;
+  animation-fill-mode: forwards; 
+}
+
+.backgroundImg-fade-out {
+  opacity: 1;
+  animation: fade-out 2s linear;
+  animation-fill-mode: forwards; 
+}

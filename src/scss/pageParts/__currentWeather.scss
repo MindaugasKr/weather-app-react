@@ -1,0 +1,54 @@
+.current {
+
+  background-color: color(background-primary);
+  display: inline-block;
+  width: 100%;
+
+  $img-dimensions: 100px;
+  &__img-container {
+    display: inline-block;
+    height: 100%;
+    width: $img-dimensions;
+  }
+  &__img {
+    width: $img-dimensions;
+    position: absolute;
+  }
+  &__temperature {
+    font-size: 90px;
+  }
+
+
+  &__location-time {
+    margin: 20px 0;
+  }
+  &__location,
+  &__time {
+    display: block;
+  }
+
+  &__location {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__info-container {
+    margin-bottom: 24px;
+  }
+  &__info-block {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    position: relative;
+
+    margin: 0 10px;
+  }
+
+  &__info-text {
+    display: block;
+
+    & strong {
+      font-weight: 500;
+    }
+  }
+}

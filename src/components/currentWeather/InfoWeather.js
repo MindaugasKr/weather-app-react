@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   renderTemp,
-  renderFall,
+  renderPrecipitation,
   renderHumidity,
   renderPressure,
   renderWindDirection,
@@ -10,14 +10,22 @@ import {
   renderUvIndex,
 } from '../../utils/renderWeatherData';
 
-function InfoWeather(props) {
+export default props => {
   const toCelsius = props.toCelsius;
-  const { tempMax, tempMin, pressure, humidity, fall, windDeg, windSpeed } = props.weatherData;
+  const {
+    tempMax,
+    tempMin,
+    pressure,
+    humidity,
+    precipitation,
+    windDeg,
+    windSpeed 
+  } = props.weatherData;
   const uvIndex = props.uvIndex;
 
   const formattedMinTemp = renderTemp(tempMin, toCelsius);
   const formattedMaxTemp = renderTemp(tempMax, toCelsius);
-  const formattedFall = renderFall(fall);
+  const formattedPrecipitation = renderPrecipitation(precipitation);
   const formattedHumidity = renderHumidity(humidity);
   const formattedPressure = renderPressure(pressure);
   const formattedWindDirection = renderWindDirection(windDeg);
@@ -29,22 +37,35 @@ function InfoWeather(props) {
       <h3>Weather conditions:</h3>
 
       <span className="current__info-text">
-        <strong>Temperature:</strong>
+        <strong>Temperature: </strong>
         {formattedMinTemp}{' ... '}{formattedMaxTemp}
       </span>
 
-      <span className="current__info-text"><strong>Rain fall:</strong> {formattedFall}</span>
+      <span className="current__info-text">
+        <strong>Precipitation: </strong>
+        {formattedPrecipitation}
+      </span>
 
-      <span className="current__info-text"><strong>Humidity:</strong> {formattedHumidity}</span>
+      <span className="current__info-text">
+        <strong>Humidity: </strong>
+        {formattedHumidity}
+      </span>
 
-      <span className="current__info-text"><strong>Presure:</strong> {formattedPressure}</span>
+      <span className="current__info-text">
+        <strong>Presure: </strong>
+        {formattedPressure}
+      </span>
 
-      <span className="current__info-text"><strong>Wind:</strong> {formattedWindDirection}, {formattedWindSpeed}</span>
+      <span className="current__info-text">
+        <strong>Wind: </strong>
+        {formattedWindDirection}, {formattedWindSpeed}
+      </span>
 
-      <span className="current__info-text"><strong>UV:</strong> {formattedUvIndex}</span>
+      <span className="current__info-text">
+        <strong>UV: </strong>
+        {formattedUvIndex}
+      </span>
 
     </div>
   )
 }
-
-export default InfoWeather;

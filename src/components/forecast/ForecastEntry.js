@@ -3,20 +3,27 @@ import React from 'react';
 import {
   renderDate,
   renderTemp,
-  renderFall,
+  renderPrecipitation,
   renderWindDirection,
   renderWindSpeed,
 } from '../../utils/renderWeatherData';
 
-const ForecastEntry = (props) => {
+export default props => {
   const toCelsius = props.weatherData.toCelsius;
   const timeZone = props.weatherData.timeZone;
-  const { temp, fall, windDeg, windSpeed, icon, time } = props.weatherData;
+  const { 
+    temp, 
+    precipitation, 
+    windDeg, 
+    windSpeed, 
+    icon, 
+    time 
+  } = props.weatherData;
   const dateFormat = props.dateFormat;
 
-  const formattedDate = renderDate(time, dateFormat, timeZone)
+  const formattedDate = renderDate(time, dateFormat, timeZone);
   const formattedTemp = renderTemp(temp, toCelsius);
-  const formattedFall = renderFall(fall);
+  const formattedPrecipitation = renderPrecipitation(precipitation);
   const formattedWindDirection = renderWindDirection(windDeg);
   const formattedWindSpeed = renderWindSpeed(windSpeed);
 
@@ -36,7 +43,7 @@ const ForecastEntry = (props) => {
       </span>
 
       <span className="weather-table__info-text">
-        {formattedFall}
+        {formattedPrecipitation}
       </span>
 
       <span className="weather-table__info-text">
@@ -48,7 +55,5 @@ const ForecastEntry = (props) => {
       </span>
 
     </div>
-  )
+  );
 }
-
-export default ForecastEntry;

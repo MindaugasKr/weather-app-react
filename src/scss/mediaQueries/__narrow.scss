@@ -1,0 +1,41 @@
+@media screen and (max-width: 360px) {
+  .search {
+    display: block;
+
+    &__text-input {
+      max-width: initial;
+      min-width: initial;
+      width: calc(100% - #{$location-input-height});
+    }
+  }
+
+  .current,.hourly, .week {
+
+    width: 100%;
+  }
+
+  .weather-table {
+
+    &__info-text {
+      padding: 0;
+
+      & img {
+        height: 30px;
+      }
+    }
+  }
+
+
+  .error {
+    &__message {
+      &--geocoding {
+        white-space: initial;
+      }
+    }
+  }
+
+  .chart-container {
+    margin: 0 0 20px;
+  }
+
+}

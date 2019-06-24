@@ -1,11 +1,11 @@
 import React, { createRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import autosugestPlaces from '../apis/autosugestPlaces';
-import { fetchWeatherData, changeFetchCoordinatesErrorStatus } from '../redux/actions';
+import autosugestPlaces from '../../apis/autosugestPlaces';
+import { fetchWeatherData, changeFetchCoordinatesErrorStatus } from '../../redux/actions';
 
-import loadingIndicator from '../images/loader/loading_indicator.png';
-import ErrorFailedToFetchGeoCoding from './error/ErrorFailedToFetchGeoCoding';
+import LoadingIndicator from './LoadingIndicator';
+import ErrorFailedToFetchGeoCoding from '../error/ErrorFailedToFetchGeoCoding';
 
 const inputRef = createRef();
 var placeAutocomplete;
@@ -29,17 +29,13 @@ const Search = (props) => {
     }
   }
 
-  const onDataFetching = () => {
-    return <img className="search__loading-indicator" alt="" src={loadingIndicator} />;
-  }
-
   const onErrorDismiss = () => {
     props.changeFetchCoordinatesErrorStatus(false);
   }
 
   return (
     <div className="search relative">
-      {props.fetchingData ? onDataFetching() : ''}
+      <LoadingIndicator shouldDisplay={props.fetchingData} />
       <div>
         <input 
           className="search__text-input" 

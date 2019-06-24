@@ -1,9 +1,9 @@
 import keys from './keys.js';
-import axios from 'axios';
+import axiosOpenWeatherMap from './axiosOpenWeatherMap';
 import openweathermapAdapter from '../utils/openweathermapAdapter.js';
 
 const currentWeather = async (lat, lon) => {
-  const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${keys.openWeatherKey}`)
+  const response = await axiosOpenWeatherMap.get(`weather?lat=${lat}&lon=${lon}&appid=${keys.openWeatherKey}`);
 
   if (response.status === 200) {
     return openweathermapAdapter(response.data);

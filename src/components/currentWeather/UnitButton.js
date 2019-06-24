@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 
 import { changeTempType } from '../../redux/actions';
 
-function UnitButton(props) {
+const UnitButton = props => {
   const onClick = () => {
     props.changeTempType(props.isCelsius);
   }
 
+  const cssClasses = `unit__btn  ${(props.isCelsius === props.toCelsius) ? 'unit__btn--active' : ''}`;
+
   return (
-    <button onClick={onClick} className={`unit__btn  ${(props.isCelsius === props.toCelsius) ? 'unit__btn--active' : '' }`}>
+    <button onClick={onClick} className={cssClasses}>
       {props.children}
     </button>
   )
@@ -17,7 +19,7 @@ function UnitButton(props) {
 
 const mapStateToProps = (state) => {
   return {
-    toCelsius: state.tempType.toCelsius,
+    toCelsius: state.settings.toCelsius,
   }
 }
 

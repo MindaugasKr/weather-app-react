@@ -1,0 +1,40 @@
+.hourly, .week {
+  margin: 30px 0;
+  background-color: color(background-primary);
+}
+
+
+.weather-table {
+  display: table;
+  width: 100%;
+
+  &__title {
+    margin: 0 0 24px;
+    font-size: 20px;
+  }
+
+  &__info-block {
+    display: table-cell;
+    padding: 24px 12px;
+
+    border-right: solid 1px color(line);
+
+
+    &--active {
+      background-color: color(active) !important; 
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+  &__info-text {
+    display: block;
+    font-weight: 400;
+
+    
+
+    &--strong {
+      font-weight: 500;
+    }
+  }
+}

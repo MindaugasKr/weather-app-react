@@ -1,0 +1,44 @@
+@media screen and (max-width: 800px) {
+  .current {
+    width: 100%;
+
+    &__info-block {
+      text-align: center;
+    }    
+
+    &__info-block {
+      display: block;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    &__img {
+      position: initial;
+      transform: none;
+    }    
+  }
+
+  .unit {
+    &__container {
+      right: 15px;
+      position: static;
+      margin: 20px 0;
+    }
+  }
+
+  .weather-table {
+
+    &__info-text {
+      padding: 0 3px;
+
+      & img {
+        height: 30px;
+      }
+    }
+  }
+
+  .chart-container {
+    margin: 0 14px 10px;
+  }
+
+}

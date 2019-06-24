@@ -6,7 +6,7 @@ import {
 const initialState = {
   fetchingData: false,
   fetchCoordinatesErrorStatus: false,
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {

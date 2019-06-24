@@ -1,0 +1,27 @@
+.unit {
+  &__container {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+  }
+
+  &__btn {
+    $dimensions: 30px;
+
+    width: $dimensions;
+    height: $dimensions;
+
+    padding: 0;
+    margin: 0;
+    border: none;
+
+    background-color: inherit;
+
+    &:hover {
+      background-color: lightgray;
+    }
+    &--active {
+      background-color: color(active) !important;
+    }
+  }
+}

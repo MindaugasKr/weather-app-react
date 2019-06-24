@@ -1,32 +1,17 @@
 import React from 'react';
 
-const errorContainer = props => {
-  let containerCss = 'error';
-  if (props.aditionalContainerCSS) containerCss += props.aditionalContainerCSS;
+const baseContainerCss = 'error ';
+const baseMessageCss = 'error__message ';
 
-  let messageCss = 'error__message';
-  if (props.aditionalMessageCSS) messageCss += props.aditionalMessageCSS;
-
-  // Optional dismiss button, requires callback
-  const dismissBtn = onDismiss => {
-    if (onDismiss) {
-      return (
-        <button className="error__dismissBtn" onClick={onDismiss}>
-          <i className="fas fa-times">
-        </i></button>
-      );
-    } else {
-      return '';
-    }
-  }
+export default props => {
+  const containerCss = baseContainerCss + (props.aditionalContainerCSS || '');
+  const messageCss = baseMessageCss + (props.aditionalMessageCSS || '');
 
   return (
     <div className={containerCss} >
       <span className={messageCss} >
-        {props.message} {dismissBtn(props.onDismiss)}
+        {props.children}
       </span>
     </div>
-  )
+  );
 }
-
-export default errorContainer;

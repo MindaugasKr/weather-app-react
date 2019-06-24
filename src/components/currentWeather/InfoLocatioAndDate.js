@@ -1,10 +1,8 @@
 import React from 'react';
 
-import {
-  renderDate,
-} from '../../utils/renderWeatherData';
+import { renderDate } from '../../utils/renderWeatherData';
 
-function InfoLocatioAndDate(props) {
+export default props => {
   const { city, country, time } = props.weatherData;
   const timeZone = props.weatherData.timeZone;
 
@@ -17,5 +15,3 @@ function InfoLocatioAndDate(props) {
     </div>
   )
 }
-
-export default InfoLocatioAndDate;

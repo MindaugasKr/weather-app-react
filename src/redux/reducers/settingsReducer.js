@@ -3,7 +3,9 @@ import {
   SET_TEMP_TYPE_FAHRENHEIT,
 } from '../actions/types';
 
-export default (state = { toCelsius: true}, action) => {
+const initialState = { toCelsius: true };
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_TEMP_TYPE_CELSIUS:
       return { toCelsius: true }

@@ -1,0 +1,13 @@
+.container-main {
+  background-color: color(background-secondary);
+  box-shadow: 0px 0px 20px 0px color(background-shadow);
+
+  width: $container-main-width;
+
+  text-align: center;
+
+  padding-top: 1px;
+  padding-bottom: 1px;
+
+  margin: 30px auto;
+}

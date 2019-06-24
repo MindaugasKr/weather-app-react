@@ -5,7 +5,7 @@ import {
   renderDayLength,
 } from '../../utils/renderWeatherData';
 
-function InfoDay(props) {
+export default props => {
   const { sunrise, sunset } = props.weatherData;
   const timeZone = props.timeZone;
 
@@ -16,17 +16,19 @@ function InfoDay(props) {
   return (
     <div className="current__info-block">
       <h3>Day info:</h3>
+
       <span className="current__info-text">
         <strong>Sun rise:</strong> {formattedSunrise}
       </span>
+
       <span className="current__info-text">
         <strong>Sun set:</strong> {formattedSunset}
       </span>
+
       <span className="current__info-text">
         <strong>Day length:</strong> {formattedDayLength}
       </span>
+      
     </div>
   )
 }
-
-export default InfoDay;

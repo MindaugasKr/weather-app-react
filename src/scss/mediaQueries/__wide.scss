@@ -1,0 +1,40 @@
+// 900 px
+@media screen and (max-width: $container-main-width) {
+  .container-main {
+    width: auto;
+    margin: 0;
+  }
+
+  .current {
+    width: $current-weather-width;
+  }
+
+  .hourly, .week {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $current-weather-width;
+    min-width: 0;
+  }
+
+  .weather-table {
+    display: table;
+    border-collapse: collapse;
+
+    &__info-block {
+      display: table-row;
+
+      padding: 0;
+      border-top: solid 1px color(line);
+    }
+    &__info-text {
+      display: table-cell;
+
+      padding: 0 12px;
+
+      & img {
+        height: 40px;
+      }
+    }
+  }
+}

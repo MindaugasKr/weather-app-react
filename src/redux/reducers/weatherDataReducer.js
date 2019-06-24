@@ -3,11 +3,13 @@ import {
   HISTORY_STATE_TO_CURRENT_STATE,
 } from '../actions/types';
 
-export default (state = {
+const initialState = {
   currentWeatherData: {},
   uvIndex: '',
   weatherForecastData: [],
-}, action) => {
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_WEATHER_DATA:
       return {...action.payload};

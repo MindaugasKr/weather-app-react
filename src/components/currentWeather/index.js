@@ -10,25 +10,6 @@ import InfoDay from './InfoDay';
 import ErrorFailedToFetchCurrent from '../error/ErrorFailedToFetchCurrent';
 
 const CurrentWeather = props => {
-
-  const prepContent = () => {
-    if (props.weatherData.failedToRetrieveData) {
-      return <ErrorFailedToFetchCurrent />;
-    } else {
-      return (
-        <>
-          <InfoLocatioAndDate {...props} />
-
-          <div className="current__info-container">
-            <InfoCurrentTemp {...props} />
-            <InfoWeather {...props} />
-            <InfoDay {...props} />
-          </div>
-        </>
-      );
-    }
-  }
-
   return (
     <div className="relative">
       <div className="current relative">
@@ -37,8 +18,17 @@ const CurrentWeather = props => {
           <UnitButton {...props} isCelsius={false} >F</UnitButton>
         </div>
 
-        {prepContent()}
-
+        {props.weatherData.failedToRetrieveData ? 
+          <ErrorFailedToFetchCurrent />
+          :
+          <>
+            <InfoLocatioAndDate {...props} />
+            <div className="current__info-container">
+              <InfoCurrentTemp {...props} />
+              <InfoWeather {...props} />
+              <InfoDay {...props} />
+            </div>
+          </>}
       </div>
     </div>
   );
@@ -46,7 +36,7 @@ const CurrentWeather = props => {
 
 const mapStateToProps = (state) => {
   return {
-    toCelsius: state.tempType.toCelsius,
+    toCelsius: state.settings.toCelsius,
     weatherData: state.weatherData.currentWeatherData,
     timeZone: state.weatherData.timeZone,
     uvIndex: state.weatherData.uvIndex,

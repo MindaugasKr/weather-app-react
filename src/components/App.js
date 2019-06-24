@@ -1,11 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import Background from './background/Background';
-import Search from './Search';
-import CurrentWeather from './currentWeather/CurrentWeather';
-import ForecastDay from './forecast/ForecastDay';
-import ForecastWeek from './forecast/ForecastWeek';
+import Background from './background';
+import Search from './search';
+import CurrentWeather from './currentWeather';
+import Forecast from './forecast';
 
 import { fetchWeatherData, histoyStateToCurrentState } from '../redux/actions';
 
@@ -26,7 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchWeatherData();
   }
-  
+
   render() {
     return (
       <Fragment>
@@ -34,8 +33,18 @@ class App extends Component {
         <div className="container-main  center-margin" >
           <Search />
           <CurrentWeather />
-          <ForecastDay />
-          <ForecastWeek />
+          <Forecast 
+            type={'hourly'}
+            dateFormat={'HHMM'}
+            containerCSS={'hourly'}
+            title='Upcoming hours:'
+          />
+          <Forecast
+            type={'week'}
+            dateFormat={'MDD'}
+            containerCSS={'week'}
+            title='Later this week:'
+          />
         </div>
       </Fragment>
     );
