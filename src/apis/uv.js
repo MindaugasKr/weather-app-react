@@ -1,13 +1,16 @@
 import keys from './keys.js';
 import axiosOpenWeatherMap from './axiosOpenWeatherMap';
 
-const uv = async (lat, lon) => {
-  const response = await axiosOpenWeatherMap.get(`uvi?lat=${lat}&lon=${lon}&appid=${keys.openWeatherKey}`);
+const returnOnFailure = undefined;
 
-  if (response.status === 200) {
-    return response.data.value;
-  } else {
-    return undefined;
+const uv = async (lat, lon) => {
+  try {
+    const response = await axiosOpenWeatherMap.get(`uvi?lat=${lat}&lon=${lon}&appid=${keys.openWeatherKey}`);
+
+    return response.status === 200 ?
+      response.data.value : returnOnFailure;
+  } catch {
+    return returnOnFailure;
   }
 }
 

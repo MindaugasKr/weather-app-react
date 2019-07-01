@@ -22,51 +22,55 @@ const tzlookup = require("tz-lookup");
 
 export const fetchWeatherData = query => async (dispatch, getState) => {
 
-  dispatch({
-    type: FETCHING_DATA,
-    payload: true
-  })
+  // dispatch({
+  //   type: FETCHING_DATA,
+  //   payload: true
+  // })
 
-  let lat, lon;
-  // get coordinates fron location search query
-  if (query) {
-    ({lat, lon} = await placeGeocoding(query));
-    // On placeGeocoding failure
-    if (!lat || !lon) {
-      dispatch({
-        type: FETCHING_DATA,
-        payload: false
-      });
-      dispatch({
-        type: ERROR_FETCH_COORDINATES,
-        payload: true
-      });
-      return;
-    }
-  // Get coordinates of current location
-  } else {
-    ({lat, lon} = await currentLocation());
-  }
+  // let lat, lon;
+  // // get coordinates fron location search query
+  // if (query) {
+  //   ({lat, lon} = await placeGeocoding(query));
+  //   // On placeGeocoding failure
+  //   if (!lat || !lon) {
+  //     dispatch({
+  //       type: FETCHING_DATA,
+  //       payload: false
+  //     });
+  //     dispatch({
+  //       type: ERROR_FETCH_COORDINATES,
+  //       payload: true
+  //     });
+  //     return;
+  //   }
+  // // Get coordinates of current location
+  // } else {
+  //   ({lat, lon} = await currentLocation());
+  // }
 
-  let currentWeatherData, uvIndex, weatherForecastData;
+  // let currentWeatherData, uvIndex, weatherForecastData;
 
-  await Promise.all([
-    (async () => {currentWeatherData = await currentWeather(lat, lon);} )(),
-    (async () => {uvIndex = await uv(lat, lon);} )(),
-    (async () => {weatherForecastData = await weatherForecast(lat, lon);} )(),
-  ]);
+  // await Promise.all([
+  //   (async () => {currentWeatherData = await currentWeather(lat, lon);} )(),
+  //   (async () => {uvIndex = await uv(lat, lon);} )(),
+  //   (async () => {weatherForecastData = await weatherForecast(lat, lon);} )(),
+  // ]);
 
-  dispatch({
-    type: FETCHING_DATA,
-    payload: false
-  })
+  // dispatch({
+  //   type: FETCHING_DATA,
+  //   payload: false
+  // })
 
-  const data = {
-    timeZone: tzlookup(lat, lon),
-    currentWeatherData,
-    uvIndex,
-    weatherForecastData,
-  }
+  // const data = {
+  //   timeZone: tzlookup(lat, lon),
+  //   currentWeatherData,
+  //   uvIndex,
+  //   weatherForecastData,
+  // }
+
+  // for testing
+  // localStorage.setItem('data', JSON.stringify(data));
+  const data = JSON.parse(localStorage.getItem('data'));
 
   dispatch({
     type: FETCH_WEATHER_DATA,

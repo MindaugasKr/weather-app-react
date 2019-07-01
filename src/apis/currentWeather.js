@@ -2,14 +2,18 @@ import keys from './keys.js';
 import axiosOpenWeatherMap from './axiosOpenWeatherMap';
 import openweathermapAdapter from '../utils/openweathermapAdapter.js';
 
-const currentWeather = async (lat, lon) => {
-  const response = await axiosOpenWeatherMap.get(`weather?lat=${lat}&lon=${lon}&appid=${keys.openWeatherKey}`);
+const returnOnFailure = { failedToRetrieveData: true };
 
-  if (response.status === 200) {
-    return openweathermapAdapter(response.data);
-  } else {
-    // Must return object because other code relies on this object existing
-    return { failedToRetrieveData: true };
+const currentWeather = async (lat, lon) => {
+  try {
+    const response = await axiosOpenWeatherMap.get(`weather?lat=${lat}&lon=${lon}&appid=${keys.openWeatherKey}`);
+
+    return response.status === 200 ? 
+      openweathermapAdapter(response.data)
+      :
+      returnOnFailure;
+  } catch {
+    return returnOnFailure;
   }
 }
 
