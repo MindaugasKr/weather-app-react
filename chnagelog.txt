@@ -9,3 +9,7 @@
 	Split main.scss into separate files.
 	Code refactoring, readability improvement.
 	Changes hourly forecast date format to HH:MM.
+
+2019-07-01
+	Refactored api calls.
+	Added ErrorBoundary to App component

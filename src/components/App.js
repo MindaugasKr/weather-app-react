@@ -5,6 +5,7 @@ import Background from './background';
 import Search from './search';
 import CurrentWeather from './currentWeather';
 import Forecast from './forecast';
+import ErrorBoundary from './error/ErrorBoundary';
 
 import { fetchWeatherData, histoyStateToCurrentState } from '../redux/actions';
 
@@ -28,7 +29,7 @@ class App extends Component {
 
   render() {
     return (
-      <Fragment>
+      <ErrorBoundary message={'Oops, something went wrong :/'}>
         <Background />
         <div className="container-main  center-margin" >
           <Search />
@@ -46,7 +47,7 @@ class App extends Component {
             title='Later this week:'
           />
         </div>
-      </Fragment>
+      </ErrorBoundary>
     );
   }
 };
