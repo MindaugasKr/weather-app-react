@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Background from './background';
@@ -30,17 +30,19 @@ class App extends Component {
   render() {
     return (
       <ErrorBoundary message={'Oops, something went wrong :/'}>
-        <Background />
-        <div className="container-main  center-margin" >
-          <Search />
-          <CurrentWeather />
+        <Background data-test="child-background" />
+        <div className="container-main  center-margin" data-test="component-app">
+          <Search data-test="child-search" />
+          <CurrentWeather data-test="child-current-weather" />
           <Forecast 
+            data-test="child-forecast"
             type={'hourly'}
             dateFormat={'HHMM'}
             containerCSS={'hourly'}
             title='Upcoming hours:'
           />
           <Forecast
+            data-test="child-forecast"
             type={'week'}
             dateFormat={'MDD'}
             containerCSS={'week'}

@@ -11,7 +11,7 @@ import ErrorFailedToFetchCurrent from '../error/ErrorFailedToFetchCurrent';
 
 const CurrentWeather = props => {
   return (
-    <div className="relative">
+    <div className="relative" data-test="component-current-weather">
       <div className="current relative">
         <div className="unit__container">
           <UnitButton {...props} isCelsius={true} >C</UnitButton>

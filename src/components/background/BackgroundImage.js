@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
 /**
  * Purpose of BackgroundImage is to:
  *    toogle values to be either current (fade in) or previous img (fade out)
  */
 export default class BackgroundImage extends Component {
+  imgRef = createRef();
+  currentBackgroundImg = this.props.currentBackgroundImg;
+
   componentDidUpdate() {
-    const img = this.props.imgRef.current;
+    const img = this.imgRef.current;
 
-    img.currentBackgroundImg = !img.currentBackgroundImg;
+    this.currentBackgroundImg = !this.currentBackgroundImg;
 
-    if (img.currentBackgroundImg) {
+    if (this.currentBackgroundImg) {
       img.src = this.props.src;
       // Using toogle produces incorrect, unextected result.
       img.classList.add("backgroundImg-fade-in");
@@ -31,10 +34,11 @@ export default class BackgroundImage extends Component {
   render() {
     return (
       <img
-        ref={this.props.imgRef}
+        ref={this.imgRef}
         className={`img-fit weather-background`}
         alt=""
-        onLoad={() => this.onLoad(this.props.imgRef.current)}
+        onLoad={() => this.onLoad(this.imgRef.current)}
+        data-test='component-background-image'
       />
     )
   }

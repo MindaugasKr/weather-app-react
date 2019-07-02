@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import BackgroundImage from './BackgroundImage';
@@ -10,23 +10,12 @@ import matchImageToWeatherCondition from './matchImageToWeatherCondition';
  *    trigger update on BackgroundImage
  */
 class Background extends Component {
-  constructor(props) {
-    super(props);
-    this.img_1_Ref = createRef();
-    this.img_2_Ref = createRef();
-  }
-
-  componentDidMount() {
-    this.img_1_Ref.current.currentBackgroundImg = true;
-    this.img_2_Ref.current.currentBackgroundImg = false;
-  }
-
   render() {
     const src = matchImageToWeatherCondition(this.props.conditionCodeOpenWeather);
     return (
-      <div className="weather-background" >
-        <BackgroundImage imgRef={this.img_1_Ref} src={src} />
-        <BackgroundImage imgRef={this.img_2_Ref} src={src} />
+      <div className="weather-background" data-test="component-background" >
+        <BackgroundImage currentBackgroundImg={true} src={src} data-test="child-background-img" />
+        <BackgroundImage currentBackgroundImg={false} src={src} data-test="child-background-img" />
       </div>
     );
   }

@@ -34,7 +34,7 @@ const Search = (props) => {
   }
 
   return (
-    <div className="search relative">
+    <div className="search relative" data-test="component-search">
       <LoadingIndicator shouldDisplay={props.fetchingData} />
       <div>
         <input 
