@@ -44,7 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://www.mk-demo.lt/weather-app/index.html",
+  "homepage": "http://www.mk-demo.lt/weather-app/",
   "devDependencies": {
     "@testing-library/react": "^8.0.4",
     "axios-mock-adapter": "^1.17.0",

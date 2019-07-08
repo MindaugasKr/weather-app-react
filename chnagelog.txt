@@ -14,5 +14,5 @@
 	Refactored api calls.
 	Added ErrorBoundary to App component
 
-----------
+2019-07-08
 	Added unit and integration tests.
