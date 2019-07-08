@@ -13,7 +13,7 @@ class Background extends Component {
   render() {
     const src = matchImageToWeatherCondition(this.props.conditionCodeOpenWeather);
     return (
-      <div className="weather-background" data-test="component-background" >
+      <div className="weather-background" data-testid="component-background" >
         <BackgroundImage currentBackgroundImg={true} src={src} data-test="child-background-img" />
         <BackgroundImage currentBackgroundImg={false} src={src} data-test="child-background-img" />
       </div>

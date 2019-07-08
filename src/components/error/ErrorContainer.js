@@ -8,7 +8,7 @@ export default props => {
   const messageCss = baseMessageCss + (props.aditionalMessageCSS || '');
 
   return (
-    <div className={containerCss} >
+    <div className={containerCss} data-testid='ErrorContainer'>
       <span className={messageCss} >
         {props.children}
       </span>

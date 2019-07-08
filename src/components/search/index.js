@@ -10,7 +10,7 @@ import ErrorFailedToFetchGeoCoding from '../error/ErrorFailedToFetchGeoCoding';
 const inputRef = createRef();
 var placeAutocomplete;
 
-const Search = (props) => {  
+export const UnconnectedSearch = (props) => {  
   useEffect(() => {
     placeAutocomplete = autosugestPlaces(inputRef.current);
   }, [])
@@ -34,8 +34,11 @@ const Search = (props) => {
   }
 
   return (
-    <div className="search relative" data-test="component-search">
-      <LoadingIndicator shouldDisplay={props.fetchingData} />
+    <div className="search relative" data-testid="component-search">
+      {props.fetchingData ?
+        <LoadingIndicator/> :
+        ''
+      }
       <div>
         <input 
           className="search__text-input" 
@@ -43,10 +46,12 @@ const Search = (props) => {
           placeholder="Location search..." 
           ref={inputRef}
           onKeyDown={onEnterKeyDown}
+          data-testid='search-input'
         />
         <button 
           className="search__btn"
           onClick={onSubmit}
+          data-testid='search-btn'
         >
           <i className="fas fa-search" />
         </button>
@@ -65,4 +70,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchWeatherData, changeFetchCoordinatesErrorStatus})(Search);
+export default connect(mapStateToProps, { fetchWeatherData, changeFetchCoordinatesErrorStatus })(UnconnectedSearch);

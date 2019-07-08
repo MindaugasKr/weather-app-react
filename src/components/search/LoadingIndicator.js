@@ -1,12 +1,13 @@
 import React from 'react';
 import loadingIndicator from '../../images/loader/loading_indicator.png';
 
-export default (props) => {
+export default () => {
   return (
     <img
-      className={`search__loading-indicator ${props.shouldDisplay ? '' : 'hide'}`}
+      className={`search__loading-indicator`}
       alt=""
       src={loadingIndicator}
+      data-testid='loading-indicator'
     />
   );
 }

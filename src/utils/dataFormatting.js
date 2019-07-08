@@ -57,9 +57,11 @@ export const formatTemp = temp => {
 
   const roundedTemp = Math.round(parseFloat(temp));
 
-  // When temp !== 0
-  if (roundedTemp) {
-    sign = roundedTemp > 0 ? '+' : '-';
+  // if (roundedTemp && roundedTemp !== 0) {
+  //   sign = roundedTemp > 0 ? '+' : '-';
+  // }
+  if (roundedTemp && roundedTemp > 0) {
+    sign = '+';
   }
 
   return `${sign}${roundedTemp}`;
@@ -69,9 +71,7 @@ export const formatTemp = temp => {
 /**
  * Wind conversion and formatting
  */
-
-// ! Last value must be written twice.
-const windAbbreviations = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'NW'];
+const windAbbreviations = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N'];
 
 export const convertWindToAbbreviation = windDeg => {
   const index = Math.floor((parseInt(windDeg) + 22.5) / 45);

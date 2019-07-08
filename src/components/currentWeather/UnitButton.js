@@ -11,7 +11,11 @@ const UnitButton = props => {
   const cssClasses = `unit__btn  ${(props.isCelsius === props.toCelsius) ? 'unit__btn--active' : ''}`;
 
   return (
-    <button onClick={onClick} className={cssClasses}>
+    <button 
+      onClick={onClick} 
+      className={cssClasses} 
+      data-testid={props.dataTestid}
+    >
       {props.children}
     </button>
   )

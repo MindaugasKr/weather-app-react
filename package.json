@@ -46,9 +46,12 @@
   },
   "homepage": "http://www.mk-demo.lt/weather-app/index.html",
   "devDependencies": {
+    "@testing-library/react": "^8.0.4",
+    "axios-mock-adapter": "^1.17.0",
     "check-prop-types": "^1.1.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
+    "jest-dom": "^3.5.0",
     "jest-enzyme": "^7.0.2",
     "moxios": "^0.4.0"
   }

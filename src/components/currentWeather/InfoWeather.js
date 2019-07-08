@@ -33,10 +33,10 @@ export default props => {
   const formattedUvIndex = renderUvIndex(uvIndex);
 
   return (
-    <div className="current__info-block">
+    <div className="current__info-block" data-testid='InfoWeather'>
       <h3>Weather conditions:</h3>
 
-      <span className="current__info-text">
+      <span className="current__info-text" data-testid='current-temp-min-max'>
         <strong>Temperature: </strong>
         {formattedMinTemp}{' ... '}{formattedMaxTemp}
       </span>

@@ -1,41 +1,31 @@
 import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
-import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
 
 import rootReducer from '../redux/reducers';
 import { middlewares } from '../configureStore';
 
+import {
+  render,
+} from '@testing-library/react';
 
 /**
- * Return node(s) with the given data-test attribute.
- * @function findByAttr
- * @param {ShallowWrapper} wrapper - Enzymes shalow wrapper
- * @param {string} val - Value of data-test attribute for search.
- * @return {ShallowWrapper}
- */
-export const findByAttr = (wrapper, value) => wrapper.find(`[data-test="${value}"]`);
-
-/**
- * Create testing store with importted reducers, middleware, and initial state.
- * @function storeFactory
- * @param {object} initialState - Initial state for store.
- * @function storeFactory
- * @returns {Store} - Redux store.
+ * Creates redux store to be used in testing
+ * 
+ * ToDo replace with store used to actual components.
+ * 
+ * @param {object} initialState - used as initil state when creating store.
  */
 export const storeFactory = initialState => applyMiddleware(...middlewares)(createStore)(rootReducer, initialState);
 
 /**
- * Factory function to create ShallowWrapper.
- * @function setup
- * @function setup
- * @param {object} initialState - initial state for component.
- * @param {object} props - Component props.
- * @param {function or class} Component - React component.
- * @returns {ShallowWrapper}
+ * Wrapper for react-testing-library render method, to make complicated render setups simpler.
+ * 
+ * @param {Class / function} Component - React component
+ * @param {object} initialState - for creating redux store.
+ * @param {object} props - initial components props
  */
-export const setup = (Component, initialState = {}, props = {}, connected = false) => {
+export const createRender = (Component, initialState = {}, props = {}) => {
   const store = storeFactory(initialState);
-  return connected ?
-    shallow(<Component store={store} {...props} />).dive().dive() :
-    shallow(<Component store={store} {...props} />);
-};
+  return render(<Provider store={store}><Component {...props} /></Provider>);
+}

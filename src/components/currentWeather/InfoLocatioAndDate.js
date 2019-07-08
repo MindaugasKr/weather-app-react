@@ -9,7 +9,7 @@ export default props => {
   const formattedDate = renderDate(time, 'YYYYMDDHHMM', timeZone);
 
   return (
-    <div className="current__location-time">
+    <div className="current__location-time" data-testid='InfoLocatioAndDate'>
       <span className="current__location">{city}, {country}</span>
       <span className="current__time">{formattedDate}</span>
     </div>

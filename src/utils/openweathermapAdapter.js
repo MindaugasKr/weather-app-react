@@ -18,7 +18,7 @@ function getPrecipitation(data) {
   }
 }
 
-export default function openweathermapAdapter(data) {
+export default data => {
   return {
     country: data.sys.country,
     city: data.name,

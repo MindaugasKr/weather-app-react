@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Background from './background';
-import Search from './search';
-import CurrentWeather from './currentWeather';
-import Forecast from './forecast';
-import ErrorBoundary from './error/ErrorBoundary';
+import Background from '../background';
+import Search from '../search';
+import CurrentWeather from '../currentWeather';
+import Forecast from '../forecast';
+import ErrorBoundary from '../error/ErrorBoundary';
 
-import { fetchWeatherData, histoyStateToCurrentState } from '../redux/actions';
+import { fetchWeatherData, histoyStateToCurrentState } from '../../redux/actions';
 
-import history from '../history';
+import history from '../../history';
 
 class App extends Component {
   constructor(props) {
@@ -24,25 +24,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchWeatherData();
+    if (!this.props.disableFetchOntest) {
+      this.props.fetchWeatherData();
+    }
   }
 
   render() {
     return (
       <ErrorBoundary message={'Oops, something went wrong :/'}>
-        <Background data-test="child-background" />
-        <div className="container-main  center-margin" data-test="component-app">
-          <Search data-test="child-search" />
-          <CurrentWeather data-test="child-current-weather" />
+        <Background/>
+        <div className="container-main  center-margin" data-testid="component-app">
+          <Search/>
+          <CurrentWeather/>
           <Forecast 
-            data-test="child-forecast"
             type={'hourly'}
             dateFormat={'HHMM'}
             containerCSS={'hourly'}
             title='Upcoming hours:'
           />
           <Forecast
-            data-test="child-forecast"
             type={'week'}
             dateFormat={'MDD'}
             containerCSS={'week'}

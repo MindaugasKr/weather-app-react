@@ -31,7 +31,7 @@ const decideContent = (dataList, callback) =>
 
 const Forecast = props => {
   return (
-    <div className={props.containerCSS} data-test="component-forecast">
+    <div className={props.containerCSS} data-testid="component-forecast">
       <h3 className="weather-table__title">{props.title}</h3>
       <div className="weather-table">
         {decideContent(props.dataList, () => prepareEntries(props))}

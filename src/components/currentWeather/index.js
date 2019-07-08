@@ -11,11 +11,23 @@ import ErrorFailedToFetchCurrent from '../error/ErrorFailedToFetchCurrent';
 
 const CurrentWeather = props => {
   return (
-    <div className="relative" data-test="component-current-weather">
+    <div className="relative" data-testid="component-current-weather">
       <div className="current relative">
         <div className="unit__container">
-          <UnitButton {...props} isCelsius={true} >C</UnitButton>
-          <UnitButton {...props} isCelsius={false} >F</UnitButton>
+          <UnitButton 
+            {...props} 
+            isCelsius={true} 
+            dataTestid='btn-celsius'
+          >
+            C
+          </UnitButton>
+          <UnitButton 
+            {...props} 
+            isCelsius={false} 
+            dataTestid='btn-fahrenheit'
+          >
+          F
+          </UnitButton>
         </div>
 
         {props.weatherData.failedToRetrieveData ? 

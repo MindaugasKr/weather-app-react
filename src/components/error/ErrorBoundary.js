@@ -10,13 +10,13 @@ export default class ErrorBoundary extends Component {
     return {hasError: true};
   }
 
-  // componentDidCatch(error, info) {
-  // }
-
   render() {
     return this.state.hasError ? 
       (
-        <div style={{height: '100vh', position: 'relative'}}>
+        <div 
+          style={{height: '100vh', position: 'relative'}}
+          data-testid='component-error-boundary'
+        >
           <h1 style={{
             position: 'absolute', 
             top: '50%', 

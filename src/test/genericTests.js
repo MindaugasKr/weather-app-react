@@ -1,43 +1,59 @@
 import {
-  findByAttr,
-  storeFactory,
-  setup,
-} from './testUtils.js';
+  createRender,
+} from 'testUtils';
 
 /**
- * Tests if Component has element with value
- * @function renderComponentWithValue
- * @param {React component} Component - React component 
- * @param {str} value - string for search.
- * @param {int} expectAmmount - ammount of elements that should have specified value.
- * @param {bool} connected - determines if Component uses react-redux connect wrapper.
- * @param {obj} props - Components props.
- * @param {obj} initialState - Components initial state.
+ * For testing in component (does not) render element with data-testid
+ * 
+ * @param {Class / Function} Component - React component
+ * @param {string} value - data-testid
+ * @param {integer} expectedAmmount 
+ * @param {object} initialState - object that will be used to create store.
+ * @param {object} props - initial components props
  */
-export const renderComponentWithValue = (Component, value, expectAmmount = 1, connected = true, props = {}, initialState={}) => {
-  test(`renders component with data-test value:${value}`, () => {
-    const wrapper = setup(Component, initialState, props, connected);
-    const ElementWithValue = findByAttr(wrapper, value);
-    expect(ElementWithValue.length).toBe(expectAmmount);
+export const rendersNodeWithDataTestId = (Component, value, expectedAmmount, initialState={}, props={}) => {
+  const message = `${expectedAmmount === 0 ? 'does not ' : ''}render ${expectedAmmount > 1 ? 'components' : 'component'} with data-testid: ${value}`;
+  test(message, () => {
+    const qs = createRender(Component, initialState, props);
+    const nodes = qs.queryAllByTestId(value);
+    expect(nodes.length).toBe(expectedAmmount);
+  })
+}
+
+
+/**
+ * For testing in component (does not) render element with provided text
+ *
+ * @param {Class / Function} Component - React component
+ * @param {string / regular expression} value - value to find element by
+ * @param {integer} expectedAmmount
+ * @param {object} initialState - object that will be used to create store.
+ * @param {object} props - initial components props
+ */
+export const rendersNodeWithExactText = (Component, value, expectedAmmount, initialState = {}, props = {}) => {
+  const message = `${expectedAmmount === 0 ? 'does not ' : ''}render ${expectedAmmount > 1 ? 'components' : 'component'} with text: ${value}`;
+  test(message, () => {
+    const qs = createRender(Component, initialState, props);
+    const nodes = qs.queryAllByText(value);
+    expect(nodes.length).toBe(expectedAmmount);
   });
 };
 
-export const hasProp = () => {};
-
 /**
- * Test if component has part of state as prop, for sinlge prop.
- * @function hasStateAsProp
- * @param {React component} Component 
- * @param {obj} initialState 
- * @param {obj} expectedProp 
- * @param {bool} connected 
- * @param {obj} props 
+ * Universal test for testing of multiple pure functions from same lib.
+ * 
+ * @function IOtestingForFunctionLibs
+ * @param {object} testingIO object with parameters for testing
+  * @param {string} fName function name
+  * @param {array} input list of input values
+  * @param {any} expectedOutput expected function output
+ * @param {object} lib imported library, e.g. import * as lib from 'lib';
  */
-export const hasStateAsProp = (Component, initialState, expectedProp, connected = true, props = {}) => {
-  test(`has ${Object.keys(expectedProp)[0]} piece of state as prop`, () => {
-    const wrapper = setup(Component, initialState, props, connected);
-    const expectedPropName = Object.keys(expectedProp)[0];
-    const stateAsProp = wrapper.instance().props[expectedPropName];
-    expect(stateAsProp).toEqual(expectedProp[expectedPropName]);
-  })
+export const IOtestingForFunctionLibs = (testingIO, lib) => {
+  testingIO.forEach(d => {
+    test(`data formating, function name: ${d.fName}`, () => {
+      const result = lib[d.fName](...d.input);
+      expect(result).toEqual(d.expectedOutput);
+    });
+  });
 };

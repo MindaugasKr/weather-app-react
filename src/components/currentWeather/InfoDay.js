@@ -14,7 +14,7 @@ export default props => {
   const formattedDayLength = renderDayLength(sunrise, sunset);
 
   return (
-    <div className="current__info-block">
+    <div className="current__info-block" data-testid='InfoDay'>
       <h3>Day info:</h3>
 
       <span className="current__info-text">

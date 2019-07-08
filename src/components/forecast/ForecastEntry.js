@@ -28,7 +28,10 @@ export default props => {
   const formattedWindSpeed = renderWindSpeed(windSpeed);
 
   return (
-    <div className="weather-table__info-block">
+    <div 
+      className="weather-table__info-block"
+      data-testid='forecast-entry'
+    >
 
       <span className="weather-table__info-text  weather-table__info-text--strong">
         {formattedDate}

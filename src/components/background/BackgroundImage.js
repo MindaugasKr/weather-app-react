@@ -38,7 +38,8 @@ export default class BackgroundImage extends Component {
         className={`img-fit weather-background`}
         alt=""
         onLoad={() => this.onLoad(this.imgRef.current)}
-        data-test='component-background-image'
+        data-testid='component-background-image'
+        src=""
       />
     )
   }
