@@ -1,0 +1,27 @@
+.img-fit {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.center-margin {
+  margin: auto;
+}
+
+.v-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.h-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.relative {
+  position: relative;
+}
+
+.hide {
+  display: none;
+}
